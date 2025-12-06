@@ -1,0 +1,86 @@
+﻿@model Com_Saude.Models.Paciente
+
+@{
+    ViewData["Title"] = "Detalhes do Paciente";
+}
+
+<style>
+    .foto-preview {
+        width: 140px;
+        height: 140px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 3px solid #0db1a5;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+</style>
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold text-success">
+            <i class="bi bi-person-circle"></i> Detalhes do Paciente
+        </h2>
+    </div>
+
+    <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body">
+
+            <div class="row g-4">
+
+                <!-- FOTO -->
+                <div class="col-md-4 text-center">
+                    <img src="@Model.UrlFoto"
+                         onerror="this.src='https://via.placeholder.com/140?text=Sem+Foto'"
+                         class="foto-preview" />
+
+                    <p class="text-muted small mt-2">Foto do paciente</p>
+                </div>
+
+                <!-- DADOS -->
+                <div class="col-md-8">
+
+                    <dl class="row mb-0">
+
+                        <dt class="col-sm-4 fw-bold">Nome</dt>
+                        <dd class="col-sm-8">@Model.Nome</dd>
+
+                        <dt class="col-sm-4 fw-bold">Email</dt>
+                        <dd class="col-sm-8">@Model.Email</dd>
+
+                        <dt class="col-sm-4 fw-bold">Telefone</dt>
+                        <dd class="col-sm-8">@Model.Telefone</dd>
+
+                        <dt class="col-sm-4 fw-bold">Nascimento</dt>
+                        <dd class="col-sm-8">@Model.DataNascimento.ToString("dd/MM/yyyy")</dd>
+
+                        <dt class="col-sm-4 fw-bold">CPF</dt>
+                        <dd class="col-sm-8">@Model.CPF</dd>
+
+                        <dt class="col-sm-4 fw-bold">Sexo</dt>
+                        <dd class="col-sm-8">@Model.Sexo</dd>
+
+                    </dl>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- BOTÕES -->
+    <div class="mt-4 d-flex gap-3">
+
+        <a asp-action="Edit" asp-route-id="@Model.IdPaciente"
+           class="btn btn-warning text-white px-4 shadow-sm rounded-pill">
+            <i class="bi bi-pencil-square"></i> Editar
+        </a>
+
+        <a asp-action="Index"
+           class="btn btn-outline-secondary px-4 shadow-sm rounded-pill">
+            <i class="bi bi-arrow-left"></i> Voltar
+        </a>
+
+    </div>
+
+</div>

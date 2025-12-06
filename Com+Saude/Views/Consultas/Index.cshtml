@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Com_Saude.Models.Consulta>
+
+@{
+    ViewData["Title"] = "Consultas";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="fw-bold" style="color: var(--secondary);">Consultas</h1>
+
+    <a asp-action="Create" class="btn btn-primary shadow-sm">
+        <i class="fa-solid fa-plus"></i> Nova Consulta
+    </a>
+</div>
+
+<table class="table table-striped table-hover shadow-sm">
+    <thead class="table-primary">
+        <tr>
+            <th>Paciente</th>
+            <th>Diagnóstico</th>
+            <th>Receita</th>
+            <th>Observações</th>
+            <th class="text-center">Ações</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+                <tr>
+                    <td>@item.Agendamento.NomePaciente</td>
+                    <td>@item.Diagnostico</td>
+                    <td>@item.Receita</td>
+                    <td>@item.Observacoes</td>
+
+                    <td class="text-center">
+                        <a asp-action="Edit" asp-route-id="@item.IdConsulta" 
+                           class="btn btn-warning btn-sm me-1 text-white">
+                            <i class="fa-solid fa-pen-to-square"></i> Editar
+                        </a>
+
+                        <a asp-action="Details" asp-route-id="@item.IdConsulta"
+                           class="btn btn-info btn-sm me-1 text-white">
+                            <i class="fa-solid fa-circle-info"></i> Detalhes
+                        </a>
+
+                        <a asp-action="Delete" asp-route-id="@item.IdConsulta"
+                           class="btn btn-danger btn-sm">
+                            <i class="fa-solid fa-trash"></i> Excluir
+                        </a>
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>

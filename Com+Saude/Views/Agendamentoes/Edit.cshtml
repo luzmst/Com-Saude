@@ -1,0 +1,68 @@
+﻿@model Com_Saude.Models.Agendamento
+
+@{
+    ViewData["Title"] = "Editar Agendamento";
+}
+
+<div class="card shadow p-4 mx-auto mt-4" style="max-width: 750px;">
+
+    <h2 class="fw-bold mb-3" style="color: var(--secondary);">
+        <i class="fa-solid fa-pen-to-square"></i> Editar Agendamento
+    </h2>
+
+    <p class="text-muted mb-4">
+        Atualize as informações do agendamento selecionado.
+    </p>
+
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <input type="hidden" asp-for="IdAgendamento" />
+
+        <div class="mb-3">
+            <label asp-for="NomePaciente" class="form-label fw-bold">Paciente</label>
+            <input asp-for="NomePaciente" class="form-control" placeholder="Nome do paciente" />
+            <span asp-validation-for="NomePaciente" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="MedicoId" class="form-label fw-bold">Médico</label>
+            <select asp-for="MedicoId" class="form-control" asp-items="ViewBag.MedicoId"></select>
+            <span asp-validation-for="MedicoId" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="NomeRecepcionista" class="form-label fw-bold">Recepcionista</label>
+            <input asp-for="NomeRecepcionista" class="form-control" placeholder="Nome do atendente" />
+            <span asp-validation-for="NomeRecepcionista" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="DataHora" class="form-label fw-bold">Data e Hora</label>
+            <input asp-for="DataHora" type="datetime-local" class="form-control" />
+            <span asp-validation-for="DataHora" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Motivo" class="form-label fw-bold">Motivo</label>
+            <input asp-for="Motivo" class="form-control" placeholder="Motivo da consulta" />
+            <span asp-validation-for="Motivo" class="text-danger"></span>
+        </div>
+
+        <div class="mt-4 d-flex">
+            <button type="submit" class="btn btn-success px-4 me-3">
+                <i class="fa-solid fa-floppy-disk"></i> Salvar
+            </button>
+
+            <a asp-action="Index" class="btn btn-secondary px-4">
+                <i class="fa-solid fa-arrow-left"></i> Cancelar
+            </a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

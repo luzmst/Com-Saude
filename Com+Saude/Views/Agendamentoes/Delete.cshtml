@@ -1,0 +1,47 @@
+﻿@model Com_Saude.Models.Agendamento
+
+@{
+    ViewData["Title"] = "Excluir Agendamento";
+}
+
+<div class="card shadow p-4 mx-auto mt-4" style="max-width: 700px;">
+
+    <h2 class="text-danger fw-bold mb-3">
+        <i class="fa-solid fa-trash-can"></i> Excluir Agendamento
+    </h2>
+
+    <p class="text-muted mb-4 fs-5">
+        Tem certeza que deseja excluir este agendamento? Esta ação não pode ser desfeita.
+    </p>
+
+    <div class="border rounded p-3 bg-light mb-4">
+        <dl class="row mb-0">
+            <dt class="col-sm-4 fw-bold text-secondary">Paciente</dt>
+            <dd class="col-sm-8">@Model.NomePaciente</dd>
+
+            <dt class="col-sm-4 fw-bold text-secondary">Médico</dt>
+            <dd class="col-sm-8">@Model.Medico?.Nome</dd>
+
+            <dt class="col-sm-4 fw-bold text-secondary">Recepcionista</dt>
+            <dd class="col-sm-8">@Model.NomeRecepcionista</dd>
+
+            <dt class="col-sm-4 fw-bold text-secondary">Data e Hora</dt>
+            <dd class="col-sm-8">@Model.DataHora.ToString("dd/MM/yyyy HH:mm")</dd>
+
+            <dt class="col-sm-4 fw-bold text-secondary">Motivo</dt>
+            <dd class="col-sm-8">@Model.Motivo</dd>
+        </dl>
+    </div>
+
+    <form asp-action="Delete" class="d-flex">
+        <input type="hidden" asp-for="IdAgendamento" />
+
+        <button type="submit" class="btn btn-danger px-4 me-3">
+            <i class="fa-solid fa-trash"></i> Excluir
+        </button>
+
+        <a asp-action="Index" class="btn btn-secondary px-4">
+            <i class="fa-solid fa-arrow-left"></i> Voltar
+        </a>
+    </form>
+</div>

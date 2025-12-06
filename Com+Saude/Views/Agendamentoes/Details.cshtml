@@ -1,0 +1,46 @@
+﻿@model Com_Saude.Models.Agendamento
+
+@{
+    ViewData["Title"] = "Detalhes do Agendamento";
+}
+
+<div class="card shadow p-4 mx-auto mt-4" style="max-width: 750px;">
+
+    <h2 class="fw-bold mb-3" style="color: var(--secondary);">
+        <i class="fa-solid fa-calendar-day"></i> Detalhes do Agendamento
+    </h2>
+
+    <p class="text-muted mb-4">
+        Informações completas do agendamento selecionado.
+    </p>
+
+    <div class="border rounded bg-light p-4 mb-4">
+        <dl class="row mb-0">
+            <dt class="col-sm-4 fw-bold text-secondary">Paciente</dt>
+            <dd class="col-sm-8">@Model.NomePaciente</dd>
+
+            <dt class="col-sm-4 fw-bold text-secondary">Médico</dt>
+            <dd class="col-sm-8">@Model.Medico?.Nome</dd>
+
+            <dt class="col-sm-4 fw-bold text-secondary">Recepcionista</dt>
+            <dd class="col-sm-8">@Model.NomeRecepcionista</dd>
+
+            <dt class="col-sm-4 fw-bold text-secondary">Data e Hora</dt>
+            <dd class="col-sm-8">@Model.DataHora.ToString("dd/MM/yyyy HH:mm")</dd>
+
+            <dt class="col-sm-4 fw-bold text-secondary">Motivo</dt>
+            <dd class="col-sm-8">@Model.Motivo</dd>
+        </dl>
+    </div>
+
+    <div class="d-flex">
+        <a asp-action="Edit" asp-route-id="@Model.IdAgendamento" class="btn btn-primary px-4 me-3">
+            <i class="fa-solid fa-pen-to-square"></i> Editar
+        </a>
+
+        <a asp-action="Index" class="btn btn-secondary px-4">
+            <i class="fa-solid fa-arrow-left"></i> Voltar
+        </a>
+    </div>
+
+</div>

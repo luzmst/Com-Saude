@@ -1,0 +1,96 @@
+﻿@model Com_Saude.Models.Medico
+
+@{
+    ViewData["Title"] = "Excluir Médico";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow-lg border-0" style="border-radius: 18px;">
+
+        <!-- HEADER -->
+        <div class="card-header text-white"
+             style="background: linear-gradient(135deg, #e63946, #b81f2a); border-radius: 18px 18px 0 0;">
+            <h3 class="mb-0 d-flex align-items-center gap-2">
+                <i class="bi bi-trash-fill"></i>
+                Confirmar Exclusão
+            </h3>
+        </div>
+
+        <div class="card-body p-4">
+
+            <p class="text-muted">
+                Tem certeza de que deseja excluir este médico?
+                <br />
+                <strong>Esta ação não poderá ser desfeita.</strong>
+            </p>
+
+            <div class="row g-4">
+
+                <!-- DADOS (Sem foto) -->
+                <div class="col-12">
+
+                    <div class="p-3 rounded shadow-sm"
+                         style="background: #f8f9fa; border-left: 5px solid #e63946;">
+
+                        <h4 class="fw-bold text-danger mb-3">
+                            <i class="bi bi-person-badge"></i>
+                            @Model.Nome
+                        </h4>
+
+                        <dl class="row">
+
+                            <dt class="col-sm-4">Email</dt>
+                            <dd class="col-sm-8">@Model.Email</dd>
+
+                            <dt class="col-sm-4">Telefone</dt>
+                            <dd class="col-sm-8">@Model.Telefone</dd>
+
+                            <dt class="col-sm-4">Nascimento</dt>
+                            <dd class="col-sm-8">@Model.DataNascimento.ToString("dd/MM/yyyy")</dd>
+
+                            <dt class="col-sm-4">CPF</dt>
+                            <dd class="col-sm-8">@Model.CPF</dd>
+
+                            <dt class="col-sm-4">Sexo</dt>
+                            <dd class="col-sm-8">
+                                @(Model.Sexo == "M" ? "Masculino" : "Feminino")
+                            </dd>
+
+                            <dt class="col-sm-4">Especialidade</dt>
+                            <dd class="col-sm-8">@Model.Especialidade?.Descricao</dd>
+                        </dl>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- BOTÕES -->
+            <div class="mt-4 d-flex justify-content-between">
+
+                <a asp-action="Index"
+                   class="btn btn-outline-secondary px-4 py-2"
+                   style="border-radius: 10px;">
+                    <i class="bi bi-arrow-left"></i> Cancelar
+                </a>
+
+                <form asp-action="Delete" method="post"
+                      onsubmit="return confirm('Tem certeza que deseja excluir?')">
+
+                    <input type="hidden" asp-for="IdMedico" />
+
+                    <button type="submit"
+                            class="btn text-white px-4 py-2"
+                            style="background: linear-gradient(135deg, #e63946, #b81f2a); border-radius: 10px;">
+                        <i class="bi bi-trash-fill"></i> Excluir
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

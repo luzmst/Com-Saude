@@ -1,0 +1,109 @@
+﻿@model Com_Saude.Models.Medico
+
+@{
+    ViewData["Title"] = "Detalhes do Médico";
+}
+
+<style>
+    .foto-preview {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 3px solid #0db1a5;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .info-label {
+        font-weight: 600;
+        color: #0a7c72;
+    }
+
+    .info-value {
+        color: #333;
+        font-size: 1rem;
+    }
+</style>
+
+<div class="container mt-4">
+
+    <div class="card shadow-lg border-0" style="border-radius: 18px;">
+
+        <div class="card-header text-white"
+             style="background: linear-gradient(135deg, #0db1a5, #0a7c72); border-radius: 18px 18px 0 0;">
+            <h3 class="mb-0 d-flex align-items-center gap-2">
+                <i class="bi bi-person-vcard-fill"></i>
+                Detalhes do Médico
+            </h3>
+        </div>
+
+        <div class="card-body p-4">
+
+            <div class="row g-4">
+
+                <!-- FOTO -->
+                <div class="col-md-4 text-center">
+
+                    <img src="@(string.IsNullOrEmpty(Model.UrlFoto)
+                                  ? "https://via.placeholder.com/150?text=Foto"
+                                  : Model.UrlFoto)"
+                         onerror="this.src='https://via.placeholder.com/150?text=Foto';"
+                         class="foto-preview mb-2">
+
+                    <p class="text-muted small">Foto do Médico</p>
+                </div>
+
+                <!-- DADOS -->
+                <div class="col-md-8">
+                    <dl class="row">
+
+                        <dt class="col-sm-4 info-label">Nome</dt>
+                        <dd class="col-sm-8 info-value">@Model.Nome</dd>
+
+                        <dt class="col-sm-4 info-label">Email</dt>
+                        <dd class="col-sm-8 info-value">@Model.Email</dd>
+
+                        <dt class="col-sm-4 info-label">Telefone</dt>
+                        <dd class="col-sm-8 info-value">@Model.Telefone</dd>
+
+                        <dt class="col-sm-4 info-label">Data de Nascimento</dt>
+                        <dd class="col-sm-8 info-value">@Model.DataNascimento.ToString("dd/MM/yyyy")</dd>
+
+                        <dt class="col-sm-4 info-label">CPF</dt>
+                        <dd class="col-sm-8 info-value">@Model.CPF</dd>
+
+                        <dt class="col-sm-4 info-label">Sexo</dt>
+                        <dd class="col-sm-8 info-value">
+                            @(Model.Sexo == "M" ? "Masculino" :
+                                      Model.Sexo == "F" ? "Feminino" : "Não informado")
+                        </dd>
+
+                        <dt class="col-sm-4 info-label">Especialidade</dt>
+                        <dd class="col-sm-8 info-value">
+                            @Model.Especialidade?.Descricao
+                        </dd>
+
+                    </dl>
+                </div>
+            </div>
+
+            <div class="mt-4 d-flex justify-content-between">
+
+                <a asp-action="Index"
+                   class="btn btn-outline-secondary px-4 py-2"
+                   style="border-radius: 10px;">
+                    <i class="bi bi-arrow-left"></i> Voltar
+                </a>
+
+                <a asp-action="Edit" asp-route-id="@Model.IdMedico"
+                   class="btn text-white px-4 py-2"
+                   style="background: linear-gradient(135deg, #0db1a5, #0a7c72); border-radius: 10px;">
+                    <i class="bi bi-pencil-square"></i> Editar
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

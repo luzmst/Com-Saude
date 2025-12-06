@@ -1,0 +1,107 @@
+﻿@model Com_Saude.Models.Agendamento
+
+@{
+    ViewData["Title"] = "Novo Agendamento";
+}
+
+<style>
+    .form-control, .form-select {
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        padding: 10px 12px;
+    }
+
+    .card-custom {
+        border-radius: 18px;
+        border: 0;
+    }
+
+    .header-gradient {
+        background: linear-gradient(135deg, #0db1a5, #0a7c72);
+        border-radius: 18px 18px 0 0;
+    }
+
+    .title-icon {
+        font-size: 1.6rem;
+    }
+</style>
+
+<div class="card shadow-lg card-custom mb-4">
+
+    <!-- HEADER -->
+    <div class="card-header text-white header-gradient py-3 px-4">
+        <h3 class="mb-0 fw-bold d-flex align-items-center gap-2">
+            <i class="fa-solid fa-calendar-plus title-icon"></i>
+            Novo Agendamento
+        </h3>
+    </div>
+
+    <!-- FORM BODY -->
+    <div class="card-body px-4 py-4">
+
+        <form asp-action="Create">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="row g-4">
+
+                <!-- Columna izquierda -->
+                <div class="col-md-6">
+
+                    <label asp-for="NomePaciente" class="form-label fw-semibold"></label>
+                    <input asp-for="NomePaciente" class="form-control" placeholder="Digite o nome do paciente" />
+                    <span asp-validation-for="NomePaciente" class="text-danger"></span>
+
+                    <label asp-for="NomeRecepcionista" class="form-label fw-semibold mt-3"></label>
+                    <input asp-for="NomeRecepcionista" class="form-control" placeholder="Nome do atendente" />
+                    <span asp-validation-for="NomeRecepcionista" class="text-danger"></span>
+
+                </div>
+
+                <!-- Columna derecha -->
+                <div class="col-md-6">
+
+                    <label asp-for="MedicoId" class="form-label fw-semibold"></label>
+                    <select asp-for="MedicoId" class="form-select" asp-items="ViewBag.MedicoId"></select>
+
+                    <label asp-for="DataHora" class="form-label fw-semibold mt-3"></label>
+                    <input asp-for="DataHora" class="form-control" type="datetime-local" />
+                    <span asp-validation-for="DataHora" class="text-danger"></span>
+
+                </div>
+
+            </div>
+
+            <!-- CAMPO DE MOTIVO (FULL WIDTH) -->
+            <div class="mt-4">
+                <label asp-for="Motivo" class="form-label fw-semibold"></label>
+                <textarea asp-for="Motivo" class="form-control"
+                          rows="3"
+                          placeholder="Ex: Dor de cabeça, exame, retorno, etc."></textarea>
+                <span asp-validation-for="Motivo" class="text-danger"></span>
+            </div>
+
+            <!-- BOTÃO -->
+            <button type="submit"
+                    class="btn text-white w-100 py-2 fs-5 mt-4"
+                    style="background: linear-gradient(135deg, #0db1a5, #0a7c72); border-radius: 12px;">
+                <i class="fa-solid fa-check"></i> Salvar Agendamento
+            </button>
+
+        </form>
+    </div>
+
+</div>
+
+<!-- BOTÃO VOLTAR -->
+<div>
+    <a asp-action="Index" class="btn btn-outline-secondary px-4 py-2" style="border-radius: 10px;">
+        <i class="fa-solid fa-arrow-left"></i> Voltar à Lista
+    </a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

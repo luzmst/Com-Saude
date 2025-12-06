@@ -1,0 +1,144 @@
+﻿@model Com_Saude.Models.Medico
+
+@{
+    ViewData["Title"] = "Editar Médico";
+}
+
+<style>
+    .foto-preview {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 3px solid #0db1a5;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+</style>
+
+<div class="container mt-4">
+
+    <div class="card shadow-lg border-0" style="border-radius: 18px;">
+
+        <!-- HEADER -->
+        <div class="card-header text-white"
+             style="background: linear-gradient(135deg, #0db1a5, #0a7c72); border-radius: 18px 18px 0 0;">
+            <h3 class="mb-0 d-flex align-items-center gap-2">
+                <i class="bi bi-pencil-square"></i>
+                Editar Médico
+            </h3>
+        </div>
+
+        <div class="card-body p-4">
+
+            <form asp-action="Edit" enctype="multipart/form-data">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <input type="hidden" asp-for="IdMedico" />
+                <input type="hidden" asp-for="UrlFoto" />
+
+                <div class="row g-4">
+
+                    <!-- FOTO -->
+                    <div class="col-md-4 text-center">
+
+                        <img id="previewFoto"
+                             src="@(string.IsNullOrEmpty(Model.UrlFoto) 
+                                   ? "https://via.placeholder.com/150?text=Foto" 
+                                   : Model.UrlFoto)"
+                             onerror="this.src='https://via.placeholder.com/150?text=Foto';"
+                             class="foto-preview mb-2">
+
+                        <p class="text-muted small">Foto atual</p>
+
+                        <label class="form-label fw-semibold mt-2">Trocar Foto</label>
+                        <input type="file" name="FotoUpload" accept="image/*"
+                               class="form-control shadow-sm"
+                               onchange="previewImage(this)" />
+                        <small class="text-muted">Formatos suportados: JPG, PNG</small>
+
+                    </div>
+
+                    <!-- CAMPOS -->
+                    <div class="col-md-8">
+
+                        <label asp-for="Nome" class="form-label fw-semibold"></label>
+                        <input asp-for="Nome" class="form-control shadow-sm" />
+                        <span asp-validation-for="Nome" class="text-danger"></span>
+
+                        <label asp-for="Email" class="form-label fw-semibold mt-3"></label>
+                        <input asp-for="Email" class="form-control shadow-sm" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+
+                        <label asp-for="Telefone" class="form-label fw-semibold mt-3"></label>
+                        <input asp-for="Telefone" class="form-control shadow-sm" />
+                        <span asp-validation-for="Telefone" class="text-danger"></span>
+
+                        <label asp-for="DataNascimento" class="form-label fw-semibold mt-3"></label>
+                        <input asp-for="DataNascimento" type="date" class="form-control shadow-sm" />
+                        <span asp-validation-for="DataNascimento" class="text-danger"></span>
+
+                        <label asp-for="CPF" class="form-label fw-semibold mt-3"></label>
+                        <input asp-for="CPF" class="form-control shadow-sm" />
+                        <span asp-validation-for="CPF" class="text-danger"></span>
+
+                        <label asp-for="Sexo" class="form-label fw-semibold mt-3"></label>
+                        <select asp-for="Sexo" class="form-select shadow-sm">
+                            <option value="">Selecione...</option>
+                            <option value="M">Masculino</option>
+                            <option value="F">Feminino</option>
+                        </select>
+                        <span asp-validation-for="Sexo" class="text-danger"></span>
+
+                        <label asp-for="EspecialidadeId" class="form-label fw-semibold mt-3"></label>
+                        <select asp-for="EspecialidadeId"
+                                class="form-select shadow-sm"
+                                asp-items="ViewBag.EspecialidadeId">
+                        </select>
+                        <span asp-validation-for="EspecialidadeId" class="text-danger"></span>
+
+                    </div>
+
+                </div>
+
+                <!-- BOTÕES -->
+                <div class="mt-4 d-flex justify-content-between">
+
+                    <a asp-action="Index"
+                       class="btn btn-outline-secondary px-4 py-2"
+                       style="border-radius: 10px;">
+                        <i class="bi bi-arrow-left"></i> Voltar
+                    </a>
+
+                    <button type="submit"
+                            class="btn text-white px-4 py-2"
+                            style="background: linear-gradient(135deg, #0db1a5, #0a7c72); border-radius: 10px;">
+                        <i class="bi bi-check-circle"></i> Salvar
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+        <script>
+            function previewImage(input) {
+                if (input.files && input.files[0]) {
+                    let reader = new FileReader();
+                    reader.onload = e => {
+                        document.getElementById('previewFoto').src = e.target.result;
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+        </script>
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

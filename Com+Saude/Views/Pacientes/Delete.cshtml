@@ -1,0 +1,69 @@
+﻿@model Com_Saude.Models.Paciente
+
+@{
+    ViewData["Title"] = "Excluir Paciente";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex align-items-center mb-3">
+        <h2 class="fw-bold text-danger">
+            <i class="bi bi-trash-fill"></i> Excluir Paciente
+        </h2>
+    </div>
+
+    <div class="alert alert-danger rounded-4 shadow-sm">
+        <h5 class="mb-0">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            Tem certeza que deseja excluir este paciente?
+        </h5>
+    </div>
+
+    <div class="card shadow-sm border-0 rounded-4 mb-4">
+        <div class="card-body">
+
+            <h4 class="text-success fw-bold mb-3">
+                <i class="bi bi-person-lines-fill"></i> Dados do Paciente
+            </h4>
+
+            <dl class="row mb-0">
+
+                <dt class="col-sm-3 fw-bold">Nome</dt>
+                <dd class="col-sm-9">@Model.Nome</dd>
+
+                <dt class="col-sm-3 fw-bold">Email</dt>
+                <dd class="col-sm-9">@Model.Email</dd>
+
+                <dt class="col-sm-3 fw-bold">Telefone</dt>
+                <dd class="col-sm-9">@Model.Telefone</dd>
+
+                <dt class="col-sm-3 fw-bold">Nascimento</dt>
+                <dd class="col-sm-9">@Model.DataNascimento.ToString("dd/MM/yyyy")</dd>
+
+                <dt class="col-sm-3 fw-bold">CPF</dt>
+                <dd class="col-sm-9">@Model.CPF</dd>
+
+                <dt class="col-sm-3 fw-bold">Sexo</dt>
+                <dd class="col-sm-9">@Model.Sexo</dd>
+
+                <dt class="col-sm-3 fw-bold">URL Foto</dt>
+                <dd class="col-sm-9 text-break">@Model.UrlFoto</dd>
+
+            </dl>
+
+        </div>
+    </div>
+
+    <form asp-action="Delete" class="d-flex gap-3">
+        <input type="hidden" asp-for="IdPaciente" />
+
+        <button type="submit" class="btn btn-danger px-4 rounded-pill shadow-sm">
+            <i class="bi bi-trash"></i> Excluir
+        </button>
+
+        <a asp-action="Index" class="btn btn-outline-secondary px-4 rounded-pill shadow-sm">
+            <i class="bi bi-arrow-left"></i> Voltar
+        </a>
+    </form>
+
+</div>

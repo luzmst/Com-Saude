@@ -1,0 +1,75 @@
+﻿@model Com_Saude.Models.Usuario
+
+@{
+    ViewData["Title"] = "Excluir Usuário";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow-lg border-0" style="border-radius: 18px;">
+
+        <div class="card-header text-white"
+             style="background: linear-gradient(135deg, #d9534f, #b52b27); border-radius: 18px 18px 0 0;">
+            <h3 class="mb-0 d-flex align-items-center gap-2">
+                <i class="bi bi-trash-fill"></i>
+                Confirmar Exclusão
+            </h3>
+        </div>
+
+        <div class="card-body p-4">
+
+            <p class="alert alert-danger fw-bold">
+                Tem certeza que deseja excluir este usuário? Esta ação não poderá ser desfeita.
+            </p>
+
+            <div class="row g-4">
+
+                <!-- DADOS DO USUÁRIO -->
+                <div class="col-md-12">
+
+                    <dl class="row">
+
+                        <dt class="col-sm-3 fw-bold">Nome</dt>
+                        <dd class="col-sm-9">@Model.Nome</dd>
+
+                        <dt class="col-sm-3 fw-bold">Email</dt>
+                        <dd class="col-sm-9">@Model.Email</dd>
+
+                        <dt class="col-sm-3 fw-bold">Telefone</dt>
+                        <dd class="col-sm-9">@Model.Telefone</dd>
+
+                        <dt class="col-sm-3 fw-bold">CPF</dt>
+                        <dd class="col-sm-9">@Model.CPF</dd>
+
+                        <dt class="col-sm-3 fw-bold">Tipo Usuário</dt>
+                        <dd class="col-sm-9">@Model.TipoUsuario?.DescricaoTipoUsuario</dd>
+
+                    </dl>
+
+                </div>
+            </div>
+
+            <!-- BOTÕES -->
+            <div class="mt-4 d-flex justify-content-between">
+
+                <a asp-action="Index"
+                   class="btn btn-outline-secondary px-4 py-2"
+                   style="border-radius: 10px;">
+                    <i class="bi bi-arrow-left"></i> Voltar
+                </a>
+
+                <form asp-action="Delete" method="post">
+                    <input type="hidden" asp-for="IdUsuario" />
+
+                    <button type="submit"
+                            class="btn btn-danger px-4 py-2"
+                            style="border-radius: 10px;">
+                        <i class="bi bi-trash"></i> Confirmar Exclusão
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>

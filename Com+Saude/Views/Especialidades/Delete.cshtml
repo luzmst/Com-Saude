@@ -1,0 +1,44 @@
+﻿@model Com_Saude.Models.Especialidade
+
+@{
+    ViewData["Title"] = "Excluir Especialidade";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-header bg-danger text-white rounded-top-4">
+            <h4 class="mb-0">
+                <i class="bi bi-trash3"></i> Excluir Especialidade
+            </h4>
+        </div>
+
+        <div class="card-body">
+
+            <h5 class="text-danger fw-semibold mb-3">
+                Tem certeza que deseja excluir esta especialidade?
+            </h5>
+
+            <dl class="row mb-4">
+                <dt class="col-sm-3 fw-bold">Descrição</dt>
+                <dd class="col-sm-9">@Model.Descricao</dd>
+            </dl>
+
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="IdEspecialidade" />
+
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-danger px-4">
+                        <i class="bi bi-trash"></i> Excluir
+                    </button>
+
+                    <a asp-action="Index" class="btn btn-outline-secondary px-4">
+                        <i class="bi bi-arrow-left"></i> Voltar
+                    </a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+</div>

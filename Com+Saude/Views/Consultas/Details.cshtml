@@ -1,0 +1,54 @@
+﻿@model Com_Saude.Models.Consulta
+
+@{
+    ViewData["Title"] = "Detalhes da Consulta";
+}
+
+<h1 class="mb-4">Detalhes da Consulta</h1>
+
+<div class="card shadow-sm p-4">
+    <h4 class="mb-3">Consulta</h4>
+    <hr />
+
+    <dl class="row">
+
+        <dt class="col-sm-3 text-muted">
+            Paciente
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Agendamento.NomePaciente)
+        </dd>
+
+        <dt class="col-sm-3 text-muted">
+            Diagnóstico
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Diagnostico)
+        </dd>
+
+        <dt class="col-sm-3 text-muted">
+            Receita
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Receita)
+        </dd>
+
+        <dt class="col-sm-3 text-muted">
+            Observações
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Observacoes)
+        </dd>
+
+    </dl>
+</div>
+
+<div class="mt-4">
+    <a asp-action="Edit" asp-route-id="@Model?.IdConsulta" class="btn btn-warning me-2">
+        ✏️ Editar
+    </a>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        ⬅️ Voltar à Lista
+    </a>
+</div>

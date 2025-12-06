@@ -1,0 +1,47 @@
+﻿@model Com_Saude.Models.Especialidade
+
+@{
+    ViewData["Title"] = "Nova Especialidade";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-header bg-success text-white rounded-top-4">
+            <h4 class="mb-0">
+                <i class="bi bi-plus-circle"></i> Cadastrar Especialidade
+            </h4>
+        </div>
+
+        <div class="card-body">
+
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="mb-3">
+                    <label asp-for="Descricao" class="form-label fw-semibold"></label>
+                    <input asp-for="Descricao" class="form-control border-success shadow-sm" placeholder="Ex: Cardiologia" />
+                    <span asp-validation-for="Descricao" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex gap-2 mt-4">
+                    <button type="submit" class="btn btn-success px-4">
+                        <i class="bi bi-check2-circle"></i> Salvar
+                    </button>
+
+                    <a asp-action="Index" class="btn btn-outline-secondary px-4">
+                        <i class="bi bi-arrow-left"></i> Voltar
+                    </a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

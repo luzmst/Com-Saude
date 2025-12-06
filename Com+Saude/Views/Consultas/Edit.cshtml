@@ -1,0 +1,53 @@
+﻿@model Com_Saude.Models.Consulta
+
+@{
+    ViewData["Title"] = "Editar Consulta";
+}
+
+<h1 class="mb-4">Editar Consulta</h1>
+
+<div class="card shadow-sm p-4 col-md-6">
+    <h4 class="mb-3">Consulta</h4>
+    <hr />
+
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <input type="hidden" asp-for="IdConsulta" />
+
+        <div class="form-group mb-3">
+            <label asp-for="AgendamentoId" class="form-label">Agendamento</label>
+            <select asp-for="AgendamentoId" class="form-control" asp-items="ViewBag.AgendamentoId"></select>
+            <span asp-validation-for="AgendamentoId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Diagnostico" class="form-label">Diagnóstico</label>
+            <input asp-for="Diagnostico" class="form-control" />
+            <span asp-validation-for="Diagnostico" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Receita" class="form-label">Receita</label>
+            <input asp-for="Receita" class="form-control" />
+            <span asp-validation-for="Receita" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Observacoes" class="form-label">Observações</label>
+            <input asp-for="Observacoes" class="form-control" />
+            <span asp-validation-for="Observacoes" class="text-danger"></span>
+        </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-success me-2">💾 Salvar</button>
+            <a asp-action="Index" class="btn btn-secondary">⬅️ Voltar</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

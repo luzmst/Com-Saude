@@ -1,0 +1,36 @@
+﻿@model Com_Saude.Models.Especialidade
+
+@{
+    ViewData["Title"] = "Detalhes da Especialidade";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-header bg-success text-white rounded-top-4">
+            <h4 class="mb-0">
+                <i class="bi bi-info-circle"></i> Detalhes da Especialidade
+            </h4>
+        </div>
+
+        <div class="card-body">
+
+            <dl class="row mb-4 mt-2">
+                <dt class="col-sm-3 fw-bold">Descrição</dt>
+                <dd class="col-sm-9">@Model.Descricao</dd>
+            </dl>
+
+            <div class="d-flex gap-2">
+                <a asp-action="Edit" asp-route-id="@Model.IdEspecialidade" class="btn btn-success px-4">
+                    <i class="bi bi-pencil-square"></i> Editar
+                </a>
+
+                <a asp-action="Index" class="btn btn-outline-secondary px-4">
+                    <i class="bi bi-arrow-left"></i> Voltar
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+</div>

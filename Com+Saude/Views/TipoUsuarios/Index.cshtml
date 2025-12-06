@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Com_Saude.Models.TipoUsuario>
+
+@{
+    ViewData["Title"] = "Tipos de Usuário";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="fw-bold text-success">
+            <i class="bi bi-list-ul"></i> Lista de Tipos de Usuário
+        </h2>
+
+        <a asp-action="Create" class="btn btn-success px-4 py-2 shadow-sm" style="border-radius: 10px;">
+            <i class="bi bi-plus-circle me-1"></i> Novo Tipo
+        </a>
+    </div>
+
+    <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body p-0">
+
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-success">
+                    <tr>
+                        <th>Descrição</th>
+                        <th class="text-center">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                            <tr>
+                                <td>@item.DescricaoTipoUsuario</td>
+                                <td class="text-center">
+
+                                    <a asp-action="Details" asp-route-id="@item.IdTipoUsuario" 
+                                       class="btn btn-sm btn-primary shadow-sm me-1" 
+                                       style="border-radius: 8px;">
+                                        <i class="bi bi-eye"></i> Visualizar
+                                    </a>
+
+                                    <a asp-action="Edit" asp-route-id="@item.IdTipoUsuario" 
+                                       class="btn btn-sm btn-warning text-white shadow-sm me-1" 
+                                       style="border-radius: 8px;">
+                                        <i class="bi bi-pencil-square"></i> Editar
+                                    </a>
+
+                                    <a asp-action="Delete" asp-route-id="@item.IdTipoUsuario" 
+                                       class="btn btn-sm btn-danger shadow-sm" 
+                                       style="border-radius: 8px;">
+                                        <i class="bi bi-trash"></i> Excluir
+                                    </a>
+
+                                </td>
+                            </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</div>

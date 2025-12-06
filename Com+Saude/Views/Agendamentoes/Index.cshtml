@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Com_Saude.Models.Agendamento>
+
+@{
+    ViewData["Title"] = "Agendamentos";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="fw-bold" style="color: var(--secondary);">
+        <i class="fa-solid fa-calendar-check"></i> Agendamentos
+    </h1>
+
+    <a asp-action="Create" class="btn btn-success shadow px-4 py-2">
+        <i class="fa-solid fa-plus"></i> Novo Agendamento
+    </a>
+</div>
+
+<div class="card shadow border-0 rounded-4">
+    <div class="card-body p-0">
+
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-success text-dark">
+                <tr>
+                    <th>Paciente</th>
+                    <th>Médico</th>
+                    <th>Recepcionista</th>
+                    <th>Data e Hora</th>
+                    <th>Motivo</th>
+                    <th class="text-center">Ações</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                        <tr class="border-bottom">
+                            <td class="fw-semibold">@item.NomePaciente</td>
+
+                            <td>
+                                <span class="badge bg-primary bg-opacity-75 p-2">
+                                    <i class="fa-solid fa-user-doctor"></i>
+                                @item.Medico.Nome
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="badge bg-info bg-opacity-75 p-2 text-dark">
+                                    <i class="fa-solid fa-headset"></i>
+                                @item.NomeRecepcionista
+                                </span>
+                            </td>
+
+                            <td class="fw-semibold">
+                                <i class="fa-solid fa-clock text-success"></i>
+                            @item.DataHora.ToString("dd/MM/yyyy HH:mm")
+                            </td>
+
+                            <td>@item.Motivo</td>
+
+                            <td class="text-center">
+
+                                <a asp-action="Details" asp-route-id="@item.IdAgendamento"
+                                   class="btn btn-outline-info btn-sm me-1 px-3">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </a>
+
+                                <a asp-action="Edit" asp-route-id="@item.IdAgendamento"
+                                   class="btn btn-outline-warning btn-sm me-1 px-3">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+
+                                <a asp-action="Delete" asp-route-id="@item.IdAgendamento"
+                                   class="btn btn-outline-danger btn-sm px-3">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+
+                            </td>
+                        </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+﻿@model Com_Saude.Models.TipoUsuario
+
+@{
+    ViewData["Title"] = "Detalhes do Tipo de Usuário";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-header text-white"
+             style="background: linear-gradient(135deg, #0db1a5, #0a7c72); border-radius: 18px 18px 0 0;">
+            <h3 class="mb-0 d-flex align-items-center gap-2">
+                <i class="bi bi-info-circle"></i> Detalhes do Tipo de Usuário
+            </h3>
+        </div>
+
+        <div class="card-body p-4">
+            <dl class="row">
+                <dt class="col-sm-3 fw-semibold">Descrição:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.DescricaoTipoUsuario)</dd>
+            </dl>
+
+            <div class="mt-4 d-flex gap-3">
+                <a asp-action="Edit" asp-route-id="@Model?.IdTipoUsuario"
+                   class="btn btn-warning text-white px-4 py-2 shadow-sm"
+                   style="border-radius: 10px;">
+                    <i class="bi bi-pencil-square me-1"></i> Editar
+                </a>
+
+                <a asp-action="Index"
+                   class="btn btn-secondary px-4 py-2 shadow-sm"
+                   style="border-radius: 10px;">
+                    <i class="bi bi-arrow-left me-1"></i> Voltar
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
