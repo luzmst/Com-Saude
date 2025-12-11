@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Com_Saude.Data;
 using Com_Saude.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
 
 namespace Com_Saude.Controllers
 {
@@ -19,8 +23,47 @@ namespace Com_Saude.Controllers
             _context = context;
         }
 
-        // GET: Usuarios
-        public async Task<IActionResult> Index()
+       
+
+[HttpGet]
+    [AllowAnonymous]
+    public IActionResult Login()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    [AllowAnonymous]
+    public async Task<IActionResult> Login(string email, string senha)
+    {
+        var usuario = _context.Usuario.FirstOrDefault(u => u.Email == email && u.Senha == senha);
+        if (usuario != null)
+        {
+            var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.Name, usuario.Nome),
+            new Claim(ClaimTypes.Email, usuario.Email),
+            new Claim("TipoUsuarioId", usuario.TipoUsuarioId.ToString())
+        };
+            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var principal = new ClaimsPrincipal(identity);
+
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
+            return RedirectToAction("Index", "Home");
+        }
+        ViewBag.Erro = "Email ou senha inválidos.";
+        return View();
+    }
+
+    public async Task<IActionResult> Logout()
+    {
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        return RedirectToAction("Login");
+    }
+
+    // GET: Usuarios
+    public async Task<IActionResult> Index()
         {
             var com_SaudeContext = _context.Usuario.Include(u => u.TipoUsuario);
             return View(await com_SaudeContext.ToListAsync());

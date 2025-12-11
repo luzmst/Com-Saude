@@ -5,6 +5,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<Com_SaudeContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Com_SaudeContext") ?? throw new InvalidOperationException("Connection string 'Com_SaudeContext' not found.")));
 
+builder.Services.AddAuthentication("Cookies")
+    .AddCookie("Cookies", options =>
+    {
+        options.LoginPath = "/Usuarios/Login";
+        options.LogoutPath = "/Usuarios/Logout";
+    });
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

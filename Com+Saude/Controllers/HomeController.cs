@@ -16,10 +16,16 @@ public class HomeController : Controller
     public async Task<IActionResult> Index()
     {
         var especialidades = await _context.Especialidade.ToListAsync();
-        return View(especialidades);
+
+        if (User.Identity.IsAuthenticated)
+            return View("IndexLogado", especialidades);
+        else
+            return View("IndexAnonimo", especialidades);
     }
 
+
     // ... resto del código
+
 
 
 
